@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.search_movie_flow.domain.entity.SearchMovieEntity" />
+    </data>
+        
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_movie_list_main"
         android:layout_width="match_parent"
@@ -13,6 +19,7 @@
             android:id="@+id/iv_movie_poster"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            load_movie_image="@{viewModel.image}"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +50,7 @@
                 android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:ems="15"
+                android:text="@{viewModel.title}"
                 android:maxLines="1"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_movie_title"
@@ -65,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/black"
+                android:text="@{viewModel.pubDate}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_movie_release"
                 app:layout_constraintStart_toEndOf="@+id/tv_movie_release"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
@@ -85,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/black"
+                android:text="@{viewModel.userRating}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_movie_rate"
                 app:layout_constraintStart_toEndOf="@+id/tv_movie_rate"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movie_release"
