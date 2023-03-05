@@ -1,12 +1,13 @@
 package com.search_movie_flow.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.search_movie_flow.R
+import com.search_movie_flow.databinding.ActivityRecentSearchBinding
+import com.search_movie_flow.presentation.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class RecentSearchActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityRecentSearchBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recent_search)
     }
 }

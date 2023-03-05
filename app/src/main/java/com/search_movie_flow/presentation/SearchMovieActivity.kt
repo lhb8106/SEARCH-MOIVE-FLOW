@@ -1,12 +1,29 @@
 package com.search_movie_flow.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.search_movie_flow.R
+import androidx.activity.viewModels
+import com.search_movie_flow.databinding.ActivitySearchMainBinding
+import com.search_movie_flow.presentation.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class SearchMovieActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class SearchMovieActivity :
+    BaseActivity<ActivitySearchMainBinding>(ActivitySearchMainBinding::inflate) {
+
+    private val viewModel: MovieViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_main)
+        clickListener()
+    }
+
+
+    private fun clickListener() {
+        binding.tvSearch.setOnClickListener { searchMovieNetwork() }
+    }
+
+    private fun searchMovieNetwork() {
+        val searchContent = binding.editText.text.toString()
+        viewModel.searchMovieList(searchContent)
     }
 }
