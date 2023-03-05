@@ -3,9 +3,9 @@ package com.search_movie_flow.presentation.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
+import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<T : ViewBinding>(
+abstract class BaseActivity<T : ViewDataBinding>(
     private val inflate : (LayoutInflater) -> T
 ) : AppCompatActivity() {
     private val _binding: T? by lazy { inflate.invoke(layoutInflater) }
@@ -15,5 +15,6 @@ abstract class BaseActivity<T : ViewBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.lifecycleOwner = this
     }
 }
