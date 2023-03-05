@@ -9,6 +9,7 @@ class SearchMovieMapper {
             searchMovieDto.image,
             searchMovieDto.link,
             searchMovieDto.title,
+            searchMovieDto.pubDate,
             searchMovieDto.userRating
         )
     }
