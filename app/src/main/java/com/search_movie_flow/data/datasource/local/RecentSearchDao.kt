@@ -14,7 +14,4 @@ interface RecentSearchDao {
     @Query("SELECT * FROM local_search_keyword ORDER BY id DESC LIMIT 10")
     suspend fun getKeywordList() : List<RecentSearchEntity>
 
-    @Delete
-    suspend fun deleteKeyword(keyword: RecentSearchEntity)
-
 }
