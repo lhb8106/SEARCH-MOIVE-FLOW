@@ -2,7 +2,6 @@ package com.search_movie_flow.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -70,11 +69,12 @@ class SearchMovieActivity :
 
     private fun registerRecentSearch() {
         binding.tvRecentSearch.setOnClickListener {
-            lifecycleScope.launch {
+            /*lifecycleScope.launch {
                 localDatabase?.recentSearchDao()?.getKeywordList()?.let { keywordList ->
                     Log.e("Test ", keywordList.toString())
                 }
-            }
+            }*/
+            startActivity(Intent(this, RecentSearchActivity::class.java))
         }
     }
 }

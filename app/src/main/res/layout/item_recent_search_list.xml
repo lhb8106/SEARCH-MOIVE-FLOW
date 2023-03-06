@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.search_movie_flow.data.dto.RecentSearchEntity" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_recent_search_main"
         android:layout_width="match_parent"
@@ -16,6 +22,7 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:ems="15"
+            android:text="@{viewModel.keyword}"
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="14dp"

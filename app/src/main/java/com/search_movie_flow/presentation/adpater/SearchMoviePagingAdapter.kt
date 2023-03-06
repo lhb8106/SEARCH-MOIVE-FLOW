@@ -1,16 +1,12 @@
 package com.search_movie_flow.presentation.adpater
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.search_movie_flow.databinding.ItemMovieListBinding
 import com.search_movie_flow.domain.entity.SearchMovieEntity
-import com.search_movie_flow.presentation.WebViewActivity
 
 class SearchMoviePagingAdapter(
     private val movieClickListener: (SearchMovieEntity) -> Unit

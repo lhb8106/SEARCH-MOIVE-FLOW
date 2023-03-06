@@ -58,6 +58,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_recent_search" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recent_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
