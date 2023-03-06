@@ -18,6 +18,7 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initSearchKeywordAdapter()
+        backBtnClickListener()
     }
 
     private fun initSearchKeywordAdapter() {
@@ -27,6 +28,12 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
                 recentSearchAdapter = RecentSearchAdapter(it ?: emptyList())
                 binding.rvRecentSearch.adapter = recentSearchAdapter
             }
+        }
+    }
+
+    private fun backBtnClickListener() {
+        binding.ivBack.setOnClickListener {
+            finish()
         }
     }
 }
