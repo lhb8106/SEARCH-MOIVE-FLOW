@@ -7,6 +7,7 @@ import com.search_movie_flow.databinding.ActivityRecentSearchBinding
 import com.search_movie_flow.presentation.adpater.RecentSearchAdapter
 import com.search_movie_flow.presentation.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -19,6 +20,7 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
         super.onCreate(savedInstanceState)
         initSearchKeywordAdapter()
         backBtnClickListener()
+        clearAllClickerListener()
     }
 
     private fun initSearchKeywordAdapter() {
@@ -34,6 +36,14 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
     private fun backBtnClickListener() {
         binding.ivBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun clearAllClickerListener() {
+        binding.tvDeleteAll.setOnClickListener {
+            GlobalScope.launch {
+                localDatabase?.clearAllTables()
+            }
         }
     }
 }

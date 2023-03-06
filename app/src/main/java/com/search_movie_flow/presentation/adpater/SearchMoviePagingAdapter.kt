@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.search_movie_flow.databinding.ItemMovieListBinding
 import com.search_movie_flow.domain.entity.SearchMovieEntity
+import com.search_movie_flow.presentation.util.GlobalDiffCallBack
 
 class SearchMoviePagingAdapter(
     private val movieClickListener: (SearchMovieEntity) -> Unit
 ) :
-    PagingDataAdapter<SearchMovieEntity, SearchMoviePagingAdapter.PagingViewHolder>(diffCallback) {
+    PagingDataAdapter<SearchMovieEntity, SearchMoviePagingAdapter.PagingViewHolder>(GlobalDiffCallBack<SearchMovieEntity>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagingViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -31,25 +32,6 @@ class SearchMoviePagingAdapter(
             holder.bind(item)
         }
 
-    }
-
-
-    companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<SearchMovieEntity>() {
-            override fun areItemsTheSame(
-                oldItem: SearchMovieEntity,
-                newItem: SearchMovieEntity
-            ): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(
-                oldItem: SearchMovieEntity,
-                newItem: SearchMovieEntity
-            ): Boolean {
-                return oldItem == newItem
-            }
-        }
     }
 
     class PagingViewHolder(
