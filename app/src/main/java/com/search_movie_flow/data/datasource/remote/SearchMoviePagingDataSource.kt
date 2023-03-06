@@ -1,9 +1,8 @@
-package com.search_movie_flow.data.datasource
+package com.search_movie_flow.data.datasource.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.search_movie_flow.data.api.NaverService
-import com.search_movie_flow.data.dto.SearchMovieDto
 import com.search_movie_flow.data.mapper.SearchMovieMapper
 import com.search_movie_flow.domain.entity.SearchMovieEntity
 import javax.inject.Inject

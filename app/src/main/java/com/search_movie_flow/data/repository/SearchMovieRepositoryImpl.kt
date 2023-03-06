@@ -1,20 +1,15 @@
 package com.search_movie_flow.data.repository
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.search_movie_flow.data.api.NaverService
-import com.search_movie_flow.data.datasource.SearchMoviePagingDataSource
+import com.search_movie_flow.data.datasource.remote.SearchMoviePagingDataSource
 import com.search_movie_flow.data.datasource.remote.SearchMovieDataSource
 import com.search_movie_flow.data.mapper.SearchMovieMapper
 import com.search_movie_flow.domain.entity.SearchMovieEntity
 import com.search_movie_flow.domain.repository.SearchMovieRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import okhttp3.Dispatcher
 import javax.inject.Inject
 
 class SearchMovieRepositoryImpl @Inject constructor(
