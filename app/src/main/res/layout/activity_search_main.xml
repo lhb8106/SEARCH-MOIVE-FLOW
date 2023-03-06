@@ -58,6 +58,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_search" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_movie_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"

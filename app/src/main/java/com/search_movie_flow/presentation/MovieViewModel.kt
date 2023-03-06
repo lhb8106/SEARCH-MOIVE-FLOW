@@ -3,6 +3,7 @@ package com.search_movie_flow.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.search_movie_flow.domain.entity.SearchMovieEntity
 import com.search_movie_flow.domain.repository.SearchMovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,23 +18,23 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val searchMovieRepository: SearchMovieRepository
 ) : ViewModel() {
-    private val _searchMovie = MutableStateFlow<List<SearchMovieEntity>?>(null)
+    private val _searchMovie = MutableStateFlow<PagingData<SearchMovieEntity>?>(null)
     val searchMovie get() = _searchMovie.asStateFlow()
 
     //영화 검색 api
     fun searchMovieList(query: String?) {
         viewModelScope.launch {
-            searchMovie.value.let {
-                searchMovieRepository.getSearchMovieList(query)
-                    .catch {
-                        Log.e("실패", "${it.printStackTrace()}")
-                    }
-                    .collectLatest {
-                        _searchMovie.value = it
-                        Log.e("성공", "${it}")
-                    }
 
-            }
+            searchMovieRepository.getSearchMovieList(query)
+                .catch {
+                    Log.e("실패", "${it.printStackTrace()}")
+                }
+                .collectLatest {
+                    _searchMovie.value = it
+                    Log.e("성공", "${it}")
+                }
+
+
         }
     }
 

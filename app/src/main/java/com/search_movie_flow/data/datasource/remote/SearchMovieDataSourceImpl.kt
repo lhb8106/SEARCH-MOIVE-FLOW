@@ -8,7 +8,7 @@ import javax.inject.Inject
 class SearchMovieDataSourceImpl @Inject constructor(
     private val naverService: NaverService
 ) : SearchMovieDataSource {
-    override suspend fun getSearchMovieList(query: String?): Response<SearchMovieDto> {
-        return naverService.searchMovie(query)
+    override suspend fun getSearchMovieList(query: String?, page : Int): Response<SearchMovieDto> {
+        return naverService.searchMovie(query, page)
     }
 }
