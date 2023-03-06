@@ -23,24 +23,9 @@ class SearchMovieRepositoryImpl @Inject constructor(
     private val service: NaverService,
 )  : SearchMovieRepository {
     override fun getSearchMovieList(query: String?): Flow<PagingData<SearchMovieEntity>> {
-        //return null
-/*       val searchMovieList = searchMovieDataSource.getSearchMovieList(query).body()?.items
-        if (searchMovieList != null) {
-            emit(searchMovieList.map { searchMovieMapper.mapperToSearchMovie(it) })
-        }*/
         return Pager(
-            config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
             pagingSourceFactory = { SearchMoviePagingDataSource(query = query ?: "", service = service, searchMovieMapper = searchMovieMapper) }
         ).flow
-
     }
-    //.flowOn(Dispatchers.IO)
-    /*
-    fun fetchMovieList() : Flow<PagingData<SearchMovieEntity>> {
-        return Pager(
-            config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = { SearchMoviePagingDataSource(query = query, service = service, searchMovieMapper = searchMovieMapper) }
-        ).flow
-    }
-     */
 }

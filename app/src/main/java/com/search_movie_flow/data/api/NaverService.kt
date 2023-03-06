@@ -9,7 +9,7 @@ interface NaverService {
     @GET("v1/search/movie.json")
     suspend fun searchMovie(
         @Query("query") query: String?,
-        @Query("page") page: Int?,
-        @Query("limit") limit: Int? = 20
+        @Query("display") display: Int,
+        @Query("start") start : Int
     ): Response<SearchMovieDto>
 }
