@@ -1,19 +1,20 @@
 package com.search_movie_flow.presentation
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
+import androidx.paging.map
 import androidx.recyclerview.widget.RecyclerView
 import com.search_movie_flow.databinding.ActivitySearchMainBinding
 import com.search_movie_flow.presentation.adpater.SearchMoviePagingAdapter
 import com.search_movie_flow.presentation.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchMovieActivity :
@@ -36,10 +37,18 @@ class SearchMovieActivity :
         val searchContent = binding.editText.text.toString()
         viewModel.searchMovieList(searchContent)
         searchMovieRecyclerView = binding.rvMovieList
-        searchMovieRecyclerView.adapter = SearchMoviePagingAdapter()
 
         viewModel.searchMovie.flowWithLifecycle(lifecycle)
             .onEach {
+                if (it != null) {
+                    searchMovieRecyclerView.adapter = SearchMoviePagingAdapter {
+                        Intent(this, WebViewActivity::class.java).apply {
+                            putExtra("url", it.link)
+                            Log.e("TEST", "${it.link}")
+                            startActivity(this)
+                        }
+                    }
+                }
                 (searchMovieRecyclerView.adapter as SearchMoviePagingAdapter).submitData(it ?: PagingData.empty())
             }
             .launchIn(lifecycleScope)
