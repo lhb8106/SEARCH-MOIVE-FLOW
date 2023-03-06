@@ -1,7 +1,6 @@
 package com.search_movie_flow.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.search_movie_flow.data.datasource.local.LocalDatabase
 import com.search_movie_flow.databinding.ActivityRecentSearchBinding
