@@ -26,9 +26,14 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
     private fun initSearchKeywordAdapter() {
         localDatabase = LocalDatabase.getInstance(this)
         lifecycleScope.launch {
-            localDatabase?.recentSearchDao()?.getKeywordList().let {
-                recentSearchAdapter = RecentSearchAdapter(it ?: emptyList())
-                binding.rvRecentSearch.adapter = recentSearchAdapter
+            localDatabase?.recentSearchDao()?.getKeywordList()?.let { keywordList ->
+                if (keywordList.isNotEmpty()) {
+                    if (binding.rvRecentSearch.adapter == null) {
+                        val recentSearchAdapter = RecentSearchAdapter()
+                        binding.rvRecentSearch.adapter = recentSearchAdapter
+                    }
+                    (binding.rvRecentSearch.adapter as RecentSearchAdapter).submitList(keywordList)
+                }
             }
         }
     }
@@ -43,6 +48,10 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
         binding.tvDeleteAll.setOnClickListener {
             GlobalScope.launch {
                 localDatabase?.clearAllTables()
+                localDatabase?.recentSearchDao()?.getKeywordList().let {
+                    (binding.rvRecentSearch.adapter as RecentSearchAdapter).submitList(it)
+                }
+
             }
         }
     }

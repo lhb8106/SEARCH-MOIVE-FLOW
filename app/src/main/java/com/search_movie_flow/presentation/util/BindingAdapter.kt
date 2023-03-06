@@ -9,7 +9,7 @@ import coil.transform.RoundedCornersTransformation
 
 object BindingAdapter {
 
-    private val EMPTY_PROFILE = com.search_movie_flow.R.drawable.rectangle_fill_gray_8dp
+    private const val EMPTY_PROFILE = com.search_movie_flow.R.drawable.rectangle_fill_gray_8dp
 
     @JvmStatic
     @BindingAdapter("load_movie_image")
