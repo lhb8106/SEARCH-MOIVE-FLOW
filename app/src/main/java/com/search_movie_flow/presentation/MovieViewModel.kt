@@ -24,7 +24,6 @@ class MovieViewModel @Inject constructor(
     //영화 검색 api
     fun searchMovieList(query: String?) {
         viewModelScope.launch {
-
             searchMovieRepository.getSearchMovieList(query)
                 .catch {
                     Log.e("실패", "${it.printStackTrace()}")
@@ -33,8 +32,6 @@ class MovieViewModel @Inject constructor(
                     _searchMovie.value = it
                     Log.e("성공", "${it}")
                 }
-
-
         }
     }
 
