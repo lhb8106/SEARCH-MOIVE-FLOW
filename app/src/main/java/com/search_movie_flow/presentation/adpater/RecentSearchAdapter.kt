@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.search_movie_flow.BR
-import com.search_movie_flow.data.dto.RecentSearchEntity
+import com.search_movie_flow.data.dto.RecentSearchDto
 import com.search_movie_flow.databinding.ItemRecentSearchListBinding
 import com.search_movie_flow.presentation.util.GlobalDiffCallBack
 
 class RecentSearchAdapter(
-    private val keywordClickListener : (RecentSearchEntity) -> Unit
+    private val keywordClickListener: (RecentSearchDto) -> Unit
 ) :
-    ListAdapter<RecentSearchEntity, RecentSearchAdapter.RecentSearchViewHolder>(
-        GlobalDiffCallBack<RecentSearchEntity>()
+    ListAdapter<RecentSearchDto, RecentSearchAdapter.RecentSearchViewHolder>(
+        GlobalDiffCallBack<RecentSearchDto>()
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSearchViewHolder {
         val binding = ItemRecentSearchListBinding.inflate(
@@ -29,7 +29,7 @@ class RecentSearchAdapter(
         setRecentSearchList(holder)
     }
 
-    private fun setRecentSearchList(holder : RecentSearchViewHolder) {
+    private fun setRecentSearchList(holder: RecentSearchViewHolder) {
         val keyword = getItem(holder.absoluteAdapterPosition)
         holder.binding.root.setOnClickListener {
             if (keyword != null) {
@@ -40,6 +40,7 @@ class RecentSearchAdapter(
 
 
     class RecentSearchViewHolder(
-        val binding : ItemRecentSearchListBinding) : RecyclerView.ViewHolder(binding.root)
+        val binding: ItemRecentSearchListBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 
 }

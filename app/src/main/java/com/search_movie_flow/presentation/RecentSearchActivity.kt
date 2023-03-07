@@ -3,7 +3,7 @@ package com.search_movie_flow.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.search_movie_flow.data.datasource.local.LocalDatabase
+import com.search_movie_flow.data.local.RecentSearchDatabase
 import com.search_movie_flow.databinding.ActivityRecentSearchBinding
 import com.search_movie_flow.presentation.adpater.RecentSearchAdapter
 import com.search_movie_flow.presentation.base.BaseActivity
@@ -12,10 +12,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityRecentSearchBinding::inflate) {
+class RecentSearchActivity :
+    BaseActivity<ActivityRecentSearchBinding>(ActivityRecentSearchBinding::inflate) {
 
-    private var localDatabase: LocalDatabase? = null
-    private lateinit var recentSearchAdapter : RecentSearchAdapter
+    private var localDatabase: RecentSearchDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,20 +25,18 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
     }
 
     private fun initSearchKeywordAdapter() {
-        localDatabase = LocalDatabase.getInstance(this)
+        localDatabase = RecentSearchDatabase.getInstance(this)
         lifecycleScope.launch {
             localDatabase?.recentSearchDao()?.getKeywordList()?.let { keywordList ->
                 if (keywordList.isNotEmpty()) {
-                    if (binding.rvRecentSearch.adapter == null) {
-                        val recentSearchAdapter = RecentSearchAdapter{
-                            Intent(this@RecentSearchActivity, SearchMovieActivity::class.java).apply {
-                                putExtra("keyword", it.keyword)
-                                startActivity(this)
-                                finish()
-                            }
+                    val recentSearchAdapter = RecentSearchAdapter {
+                        Intent(this@RecentSearchActivity, SearchMovieActivity::class.java).apply {
+                            putExtra("keyword", it.keyword)
+                            startActivity(this)
+                            finish()
                         }
-                        binding.rvRecentSearch.adapter = recentSearchAdapter
                     }
+                    binding.rvRecentSearch.adapter = recentSearchAdapter
                     (binding.rvRecentSearch.adapter as RecentSearchAdapter).submitList(keywordList)
                 }
             }
@@ -53,12 +51,11 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
 
     private fun clearAllClickerListener() {
         binding.tvDeleteAll.setOnClickListener {
-            GlobalScope.launch {
+            lifecycleScope.launch {
                 localDatabase?.clearAllTables()
                 localDatabase?.recentSearchDao()?.getKeywordList().let {
                     (binding.rvRecentSearch.adapter as RecentSearchAdapter).submitList(it)
                 }
-
             }
         }
     }

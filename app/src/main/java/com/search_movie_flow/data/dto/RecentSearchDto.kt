@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "local_search_keyword")
-data class RecentSearchEntity(
+data class RecentSearchDto(
     @PrimaryKey(autoGenerate = true) var id : Int = 0,
     var keyword : String
 )

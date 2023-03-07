@@ -4,7 +4,6 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class BaseWebChromeClient : WebChromeClient() {

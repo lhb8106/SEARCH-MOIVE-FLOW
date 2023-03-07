@@ -1,7 +1,7 @@
 package com.search_movie_flow.di
 
 import com.search_movie_flow.BuildConfig
-import com.search_movie_flow.data.api.NaverService
+import com.search_movie_flow.data.api.SearchMovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -56,6 +56,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideNaverSearchService(retrofit: Retrofit): NaverService =
-        retrofit.create(NaverService::class.java)
+    fun provideSearchMovieService(retrofit: Retrofit): SearchMovieService =
+        retrofit.create(SearchMovieService::class.java)
 }

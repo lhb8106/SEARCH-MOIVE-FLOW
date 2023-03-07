@@ -21,7 +21,6 @@ class MovieViewModel @Inject constructor(
     private val _searchMovie = MutableStateFlow<PagingData<SearchMovieEntity>?>(null)
     val searchMovie get() = _searchMovie.asStateFlow()
 
-    //영화 검색 api
     fun searchMovieList(query: String?) {
         viewModelScope.launch {
             searchMovieRepository.getSearchMovieList(query)
@@ -30,7 +29,7 @@ class MovieViewModel @Inject constructor(
                 }
                 .collectLatest {
                     _searchMovie.value = it
-                    Log.e("성공", "${it}")
+                    Log.e("성공", "$it")
                 }
         }
     }

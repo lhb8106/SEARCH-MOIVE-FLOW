@@ -7,6 +7,5 @@ import dagger.hilt.android.HiltAndroidApp
 class SearchMovieApp : Application() {
     override fun onCreate() {
         super.onCreate()
-
     }
 }

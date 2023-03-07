@@ -1,9 +1,8 @@
 package com.search_movie_flow.di
 
-import com.search_movie_flow.data.api.NaverService
-import com.search_movie_flow.data.datasource.remote.SearchMovieDataSource
-import com.search_movie_flow.data.datasource.remote.SearchMovieDataSourceImpl
-import dagger.Binds
+import com.search_movie_flow.data.api.SearchMovieService
+import com.search_movie_flow.data.datasource.SearchMovieDataSource
+import com.search_movie_flow.data.datasource.SearchMovieDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +15,7 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun searchMovieDataSource(naverService: NaverService) : SearchMovieDataSource =
-        SearchMovieDataSourceImpl(naverService)
+    fun searchMovieDataSource(service: SearchMovieService) : SearchMovieDataSource =
+        SearchMovieDataSourceImpl(service)
 
 }
