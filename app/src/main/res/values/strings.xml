@@ -5,6 +5,6 @@
     <string name="movie_title">제목</string>
     <string name="movie_release">출시</string>
     <string name="movie_rate">평점</string>
-    <string name="recent_search">최근검색</string>
+    <string name="recent_search">최근검색어</string>
     <string name="delete_all">전체삭제</string>
 </resources>

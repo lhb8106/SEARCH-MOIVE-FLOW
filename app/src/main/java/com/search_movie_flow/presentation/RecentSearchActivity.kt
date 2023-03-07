@@ -45,6 +45,7 @@ class RecentSearchActivity :
 
     private fun backBtnClickListener() {
         binding.ivBack.setOnClickListener {
+            startActivity(Intent(this@RecentSearchActivity, SearchMovieActivity::class.java))
             finish()
         }
     }

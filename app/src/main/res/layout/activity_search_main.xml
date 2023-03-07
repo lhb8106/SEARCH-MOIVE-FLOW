@@ -10,35 +10,43 @@
         android:layout_height="match_parent"
         tools:context=".presentation.SearchMovieActivity">
 
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_main_logo"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_recent_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/rectangle_fill_gray_8dp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp"
             android:text="@string/recent_search"
-            android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textColor="@color/gray_53"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
 
         <TextView
             android:id="@+id/tv_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_fill_purple_8dp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp"
             android:text="@string/search_keyword"
             android:textColor="@color/white"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_recent_search"
-            app:layout_constraintEnd_toStartOf="@+id/tv_recent_search"
-            app:layout_constraintTop_toTopOf="@+id/tv_recent_search" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_recent_search"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
         <EditText
             android:id="@+id/et_search"
@@ -49,8 +57,9 @@
             android:background="@drawable/rectangle_border_purple_8dp"
             android:hint="@string/search_hint"
             android:maxLines="1"
+            android:textSize="16dp"
             android:paddingVertical="8dp"
-            android:paddingStart="8dp"
+            android:paddingStart="12dp"
             android:textColorHint="@color/gray_c6"
             app:layout_constraintBottom_toBottomOf="@+id/tv_search"
             app:layout_constraintEnd_toStartOf="@+id/tv_search"
