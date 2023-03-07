@@ -23,8 +23,15 @@ class SearchMoviePagingAdapter(
     }
 
     override fun onBindViewHolder(holder: PagingViewHolder, position: Int) {
-        holder.binding.setVariable(BR.viewModel, getItem(position))
-        setMovieList(holder)
+        /*holder.binding.setVariable(BR.viewModel, getItem(position))
+        setMovieList(holder)*/
+        val movie = getItem(position)
+        if (movie != null) {
+            holder.bind(movie)
+            holder.itemView.setOnClickListener {
+                movieClickListener(movie)
+            }
+        }
     }
 
     private fun setMovieList(holder : PagingViewHolder) {
@@ -33,9 +40,6 @@ class SearchMoviePagingAdapter(
             if (movie != null) {
                 movieClickListener(movie)
             }
-        }
-        if (movie != null) {
-            holder.bind(movie)
         }
     }
 

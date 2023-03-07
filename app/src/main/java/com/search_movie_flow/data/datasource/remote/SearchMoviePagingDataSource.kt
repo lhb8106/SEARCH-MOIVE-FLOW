@@ -14,24 +14,31 @@ class SearchMoviePagingDataSource @Inject constructor(
 ) : PagingSource<Int, SearchMovieEntity>() {
 
     override fun getRefreshKey(state: PagingState<Int, SearchMovieEntity>): Int? {
-        // 이전에 로드한 페이지의 마지막 인덱스 값
-        return state.anchorPosition
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchMovieEntity> {
         return try {
             val page = params.key ?: 1
-            val results = service.searchMovie(query = query, display = page, start =1 + (page - 1) * params.loadSize ).body()?.items?.map {
-                searchMovieMapper.mapperToSearchMovie(it)
-            } ?: emptyList()
+            val results = service.searchMovie(query = query, display = params.loadSize, start = (page - 1) * params.loadSize +1 )
+                .body()?.items?.map {
+                    searchMovieMapper.mapperToSearchMovie(it)
+                } ?: emptyList()
 
-            val nextPage =
-                if (results.isEmpty()) null else page + 1
+            val nextPage = if (results.size < params.loadSize) {
+                null // 마지막 페이지
+            } else {
+                page + 1 // 다음 페이지
+            }
+
             LoadResult.Page(
-                data = results, prevKey = if (page == 1) null else page - 1, nextKey = nextPage
+                data = results,
+                prevKey = if (page == 1) null else page - 1,
+                nextKey = nextPage
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
+
 }
