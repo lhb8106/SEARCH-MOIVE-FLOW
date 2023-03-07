@@ -7,6 +7,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.search_movie_flow.databinding.ActivityWebViewBinding
 import com.search_movie_flow.presentation.base.BaseActivity
+import com.search_movie_flow.presentation.base.BaseWebChromeClient
 
 
 class WebViewActivity : BaseActivity<ActivityWebViewBinding>(ActivityWebViewBinding::inflate) {

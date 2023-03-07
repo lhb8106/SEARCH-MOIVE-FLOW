@@ -52,7 +52,7 @@ class RecentSearchActivity :
 
     private fun clearAllClickerListener() {
         binding.tvDeleteAll.setOnClickListener {
-            lifecycleScope.launch {
+            GlobalScope.launch {
                 localDatabase?.clearAllTables()
                 localDatabase?.recentSearchDao()?.getKeywordList().let {
                     (binding.rvRecentSearch.adapter as RecentSearchAdapter).submitList(it)

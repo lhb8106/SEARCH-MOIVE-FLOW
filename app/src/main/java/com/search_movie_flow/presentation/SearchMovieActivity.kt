@@ -58,7 +58,6 @@ class SearchMovieActivity :
                         Intent(this, WebViewActivity::class.java).apply {
                             putExtra("url", it.link)
                             startActivity(this)
-                            finish()
                         }
                     }
                 }

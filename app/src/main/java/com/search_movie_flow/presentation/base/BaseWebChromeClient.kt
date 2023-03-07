@@ -1,4 +1,4 @@
-package com.search_movie_flow.presentation
+package com.search_movie_flow.presentation.base
 
 import android.webkit.WebChromeClient
 import android.webkit.WebView
