@@ -9,7 +9,9 @@ import com.search_movie_flow.data.dto.RecentSearchEntity
 import com.search_movie_flow.databinding.ItemRecentSearchListBinding
 import com.search_movie_flow.presentation.util.GlobalDiffCallBack
 
-class RecentSearchAdapter :
+class RecentSearchAdapter(
+    private val keywordClickListener : (RecentSearchEntity) -> Unit
+) :
     ListAdapter<RecentSearchEntity, RecentSearchAdapter.RecentSearchViewHolder>(
         GlobalDiffCallBack<RecentSearchEntity>()
     ) {
@@ -24,6 +26,16 @@ class RecentSearchAdapter :
 
     override fun onBindViewHolder(holder: RecentSearchViewHolder, position: Int) {
         holder.binding.setVariable(BR.viewModel, getItem(position))
+        setRecentSearchList(holder)
+    }
+
+    private fun setRecentSearchList(holder : RecentSearchViewHolder) {
+        val keyword = getItem(holder.absoluteAdapterPosition)
+        holder.binding.root.setOnClickListener {
+            if (keyword != null) {
+                keywordClickListener(keyword)
+            }
+        }
     }
 
 

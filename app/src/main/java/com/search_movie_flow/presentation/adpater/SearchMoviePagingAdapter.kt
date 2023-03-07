@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.search_movie_flow.BR
 import com.search_movie_flow.databinding.ItemMovieListBinding
 import com.search_movie_flow.domain.entity.SearchMovieEntity
 import com.search_movie_flow.presentation.util.GlobalDiffCallBack
@@ -22,16 +23,20 @@ class SearchMoviePagingAdapter(
     }
 
     override fun onBindViewHolder(holder: PagingViewHolder, position: Int) {
-        val item = getItem(position)
+        holder.binding.setVariable(BR.viewModel, getItem(position))
+        setMovieList(holder)
+    }
+
+    private fun setMovieList(holder : PagingViewHolder) {
+        val movie = getItem(holder.absoluteAdapterPosition)
         holder.binding.root.setOnClickListener {
-            if (item != null) {
-                movieClickListener(item)
+            if (movie != null) {
+                movieClickListener(movie)
             }
         }
-        if (item != null) {
-            holder.bind(item)
+        if (movie != null) {
+            holder.bind(movie)
         }
-
     }
 
     class PagingViewHolder(

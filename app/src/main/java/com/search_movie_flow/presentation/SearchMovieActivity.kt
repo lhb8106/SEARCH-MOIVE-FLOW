@@ -31,11 +31,15 @@ class SearchMovieActivity :
         registerRecentSearch()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setRecentSearchKeyword()
+    }
 
     private fun clickListener() {
         localDatabase = LocalDatabase.getInstance(this)
         binding.tvSearch.setOnClickListener {
-            searchMovieNetwork()
+            searchMovieNetwork(binding.editText.text.toString())
             lifecycleScope.launch {
                 val inputText = binding.editText.text.toString()
                 val newSearchKeyword = RecentSearchEntity(keyword = inputText.trim())
@@ -45,8 +49,8 @@ class SearchMovieActivity :
         }
     }
 
-    private fun searchMovieNetwork() {
-        val searchContent = binding.editText.text.toString()
+    private fun searchMovieNetwork(searchContent : String) {
+        //val searchContent = binding.editText.text.toString()
         viewModel.searchMovieList(searchContent)
         searchMovieRecyclerView = binding.rvMovieList
 
@@ -75,6 +79,14 @@ class SearchMovieActivity :
                 }
             }*/
             startActivity(Intent(this, RecentSearchActivity::class.java))
+        }
+    }
+
+    private fun setRecentSearchKeyword() {
+        val keyword = intent.getStringExtra("keyword")
+        if(keyword != null) {
+            searchMovieNetwork(keyword)
+            binding.editText.setText(keyword)
         }
     }
 }

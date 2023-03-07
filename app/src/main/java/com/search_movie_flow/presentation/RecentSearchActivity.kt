@@ -1,5 +1,6 @@
 package com.search_movie_flow.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.search_movie_flow.data.datasource.local.LocalDatabase
@@ -29,7 +30,13 @@ class RecentSearchActivity : BaseActivity<ActivityRecentSearchBinding>(ActivityR
             localDatabase?.recentSearchDao()?.getKeywordList()?.let { keywordList ->
                 if (keywordList.isNotEmpty()) {
                     if (binding.rvRecentSearch.adapter == null) {
-                        val recentSearchAdapter = RecentSearchAdapter()
+                        val recentSearchAdapter = RecentSearchAdapter{
+                            Intent(this@RecentSearchActivity, SearchMovieActivity::class.java).apply {
+                                putExtra("keyword", it.keyword)
+                                startActivity(this)
+                                finish()
+                            }
+                        }
                         binding.rvRecentSearch.adapter = recentSearchAdapter
                     }
                     (binding.rvRecentSearch.adapter as RecentSearchAdapter).submitList(keywordList)
